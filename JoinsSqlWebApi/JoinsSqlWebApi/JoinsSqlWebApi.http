@@ -1,0 +1,6 @@
+@JoinsSqlWebApi_HostAddress = http://localhost:5217
+
+GET {{JoinsSqlWebApi_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###

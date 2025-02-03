@@ -1,0 +1,11 @@
+﻿namespace JoinsSqlWebApi.Models
+{
+    public class Products
+    {
+        public int ProductID { get; set; }
+        public string ProductName { get; set; }
+        public decimal Price { get; set; }
+        public CategoryClass Categories { get; set; }
+    }
+
+}
