@@ -1,0 +1,165 @@
+﻿@model IEnumerable<Registration_Form.Models.User>
+
+@{
+	int x = 1;
+}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>GetAll Users</title>
+	<style>
+		.container {
+			font-family: Arial, sans-serif;
+			background-color: #f9f9f9;
+			box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+			border-radius: 8px;
+		}
+
+		h1 {
+			text-align: center;
+			color: #333;
+			font-size: 26px;
+		}
+
+		.btn {
+			display: inline-block;
+			padding: 10px 20px;
+			background-color: #4CAF50;
+			color: white;
+			text-decoration: none;
+			border-radius: 5px;
+			margin-bottom: 20px;
+			text-align: center;
+			transition: background-color 0.3s;
+		}
+
+			.btn:hover {
+				background-color: #45a049;
+				color: aliceblue;
+			}
+
+		table {
+			border-collapse: collapse;
+			margin-top: 20px;
+		}
+
+			table th, table td {
+				padding: 8px;
+				border: 1px solid #ddd;
+				text-align: left;
+				font-size: 14px;
+			}
+
+			table th {
+				background-color: #383535;
+				color: white;
+			}
+
+			table tr:nth-child(even) {
+				background-color: #f9f9f9;
+			}
+
+			table tr:hover {
+				background-color: #f1f1f1;
+			}
+
+		.action-links button {
+			color: white;
+			border: none;
+			padding: 8px 16px;
+			margin-right: 2px;
+			border-radius: 2px;
+			cursor: pointer;
+			transition: background-color 0.3s;
+		}
+
+		.action-links .edit-btn {
+			background-color: #28a745;
+		}
+
+			.action-links .edit-btn:hover {
+				background-color: #218838;
+			}
+
+		.action-links .details-btn {
+			background-color: #007bff;
+		}
+
+			.action-links .details-btn:hover {
+				background-color: #0056b3;
+			}
+
+		.action-links .delete-btn {
+			background-color: #dc3545;
+		}
+
+			.action-links .delete-btn:hover {
+				background-color: #c82333;
+			}
+
+		.action-links a {
+			color: white;
+			text-decoration: none;
+		}
+
+	</style>
+</head>
+<body>
+
+	<div class="container">
+		<h1>User's Page</h1>
+
+		<a href="@Url.Action("InsertUser")" class="btn">Create New User</a>
+		<table>
+			<thead>
+				<tr>
+					<th>UserId</th>
+					<th>First Name</th>
+					<th>Last Name</th>
+					<th>Email</th>
+					<th>Phone</th>
+					<th>Address</th>
+					<th>State</th>
+					<th>Country</th>
+					<th>Area Code</th>
+					<th>Actions</th>
+				</tr>
+			</thead>
+			<tbody>
+				@foreach (var item in Model)
+				{
+					<tr>
+						@* <td>@item.UserId</td> *@
+						<td>@(x++)</td>
+						<td>@item.FirstName</td>
+						<td>@item.LastName</td>
+						<td>@item.Email</td>
+						<td>@item.PhoneNumber</td>
+						<td>@item.StreetAddress</td>
+						<td>@item.StateName</td>
+						<td>@item.CountryName</td>
+						<td>@item.AreaCode</td>
+						<td class="action-links">
+							<button class="edit-btn"><a href="@Url.Action("Update", new { id = item.UserId })">Update</a></button>
+							<button class="details-btn"><a href="@Url.Action("Details", new { id = item.UserId })">Details</a></button>
+							<button class="delete-btn"><a  href="@Url.Action("Delete", new { id = item.UserId })">Delete</a></button>
+						</td>
+					</tr>
+				}
+			</tbody>
+		</table>
+	</div>
+	@* <script> *@
+	@* 	let btn=document.querySelector(".delete-btn"); *@
+
+	@* 	btn.addEventListener("click",function(){ *@
+	@* 		alert("Are you sure you want to delete this user?"); *@
+	@* 	}); *@
+
+	@* </script> *@
+
+</body>
+</html>

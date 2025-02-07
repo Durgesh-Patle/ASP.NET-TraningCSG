@@ -1,0 +1,126 @@
+﻿@model Registration_Form.Models.User
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User Details</title>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0 ;
+            padding: 0;
+
+        }
+
+        #container {
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0px 0px 10px black;
+            width: 600px;
+            text-align: center;
+            margin:auto;
+        }
+
+        h2 {
+            margin-bottom: 20px;
+            color: #333;
+        }
+
+        .details {
+            text-align: left;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            row-gap: 10px;
+        }
+
+            .details label {
+                font-weight: bold;
+                color: #555;
+            }
+
+            .details span {
+                color: #222;
+            }
+
+        .buttons {
+            margin-top: 20px;
+        }
+
+        label{
+            color:black;
+        }
+
+        .btn {
+            padding: 10px 15px;
+            text-decoration: none;
+            color: white;
+            border-radius: 5px;
+            margin: 5px;
+            font-size: 14px;
+        }
+
+        .edit-btn {
+            background-color: #007bff;
+        }
+
+            .edit-btn:hover {
+                background-color: #0056b3;
+            }
+
+        .back-btn {
+            background-color: #28a745;
+        }
+
+            .back-btn:hover {
+                background-color: #1e7e34;
+            }
+
+    </style>
+</head>
+<body>
+
+    <div id="container">
+        <h2>User Details</h2>
+        <hr />
+
+        <div class="details">
+            <label>User ID:</label>
+            <span>@Model.UserId</span>
+
+            <label>First Name:</label>
+            <span>@Model.FirstName</span>
+
+            <label>Last Name:</label>
+            <span>@Model.LastName</span>
+
+            <label>Email:</label>
+            <span>@Model.Email</span>
+
+            <label>Phone:</label>
+            <span>@Model.PhoneNumber</span>
+
+            <label>Address:</label>
+            <span>@Model.StreetAddress</span>
+
+            <label>State:</label>
+            <span>@Model.StateName</span>
+
+            <label>Country:</label>
+            <span>@Model.CountryName</span>
+
+            <label>Area Code:</label>
+            <span>@Model.AreaCode</span>
+        </div>
+
+        <div class="buttons">
+            <a href="@Url.Action("Update", new { id = @Model.UserId })" class="btn edit-btn">Update</a>
+            <a href="@Url.Action("Index")" class="btn back-btn">Back to List</a>
+        </div>
+    </div>
+
+</body>
+</html>
