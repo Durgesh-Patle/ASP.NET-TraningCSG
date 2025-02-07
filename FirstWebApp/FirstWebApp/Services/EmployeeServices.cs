@@ -1,11 +1,9 @@
-﻿using CRUDOperations.Interfaces;
-using CRUDOperations.Models;
-using System.Data.SqlClient;
+﻿using FirstWebApp.Interface;
+using FirstWebApp.Models;
+using Microsoft.Data.SqlClient;
 using System.Data;
-using System.Reflection.PortableExecutable;
 
-
-namespace CRUDOperations.Services
+namespace FirstWebApp.Services
 {
     public class EmployeeService : IEmployee
     {
@@ -17,6 +15,7 @@ namespace CRUDOperations.Services
         }
 
         public async Task<List<Employee>> GetEmployeesAsync()
+
         {
             var employees = new List<Employee>();
 
@@ -116,17 +115,21 @@ namespace CRUDOperations.Services
 
                         using (SqlDataReader reader = await cmd.ExecuteReaderAsync())
                         {
-                            if (await reader.ReadAsync())
+                            while (await reader.ReadAsync())
                             {
-                                employee = new Employee
+
+                                if (await reader.ReadAsync())
                                 {
-                                    Id = reader.GetInt32(reader.GetOrdinal("Id")),
-                                    Name = reader.GetString(reader.GetOrdinal("Name")),
-                                    Email = reader.GetString(reader.GetOrdinal("Email")),
-                                    Number = reader.GetString(reader.GetOrdinal("Number")),
-                                    Department = reader.GetString(reader.GetOrdinal("Department")),
-                                    Salary = reader.GetDecimal(reader.GetOrdinal("Salary"))
-                                };
+                                    employee = new Employee
+                                    {
+                                        Id = reader.GetInt32(reader.GetOrdinal("Id")),
+                                        Name = reader.GetString(reader.GetOrdinal("Name")),
+                                        Email = reader.GetString(reader.GetOrdinal("Email")),
+                                        Number = reader.GetString(reader.GetOrdinal("Number")),
+                                        Department = reader.GetString(reader.GetOrdinal("Department")),
+                                        Salary = reader.GetDecimal(reader.GetOrdinal("Salary"))
+                                    };
+                                }
                             }
                         }
                     }
@@ -135,14 +138,11 @@ namespace CRUDOperations.Services
 
             catch (Exception ex)
             {
-             
+
                 Console.WriteLine($"Error: {ex.Message}");
             }
-
             return employee;
-
         }
-
 
         public async Task<string> DeleteEmployeByIdAsync(int id)
         {
@@ -180,9 +180,9 @@ namespace CRUDOperations.Services
             }
             catch (Exception ex)
             {
-                return $"error: {ex.Message}";  
+                return $"error: {ex.Message}";
             }
-            }
+        }
 
         public async Task<string> UpdateEmployeeById(Employee emp)
         {
@@ -196,28 +196,23 @@ namespace CRUDOperations.Services
                     {
                         cmd.CommandType = CommandType.StoredProcedure;
 
-                        cmd.Parameters.AddWithValue("@Id",emp.Id);
+                        cmd.Parameters.AddWithValue("@Id", emp.Id);
                         cmd.Parameters.AddWithValue("@Name", emp.Name);
                         cmd.Parameters.AddWithValue("@Email", emp.Email);
                         cmd.Parameters.AddWithValue("@Number", emp.Number);
                         cmd.Parameters.AddWithValue("@Department", emp.Department);
                         cmd.Parameters.AddWithValue("@Salary", emp.Salary);
 
-                        var outputParan = new SqlParameter(
-                             "@ReturnValue",
-                             SqlDbType.NVarChar,
-                             100)
+                        var outputParam = new SqlParameter("@ReturnValue", SqlDbType.NVarChar, 100)
                         {
                             Direction = ParameterDirection.Output
                         };
 
-                        cmd.Parameters.Add(outputParan);
+                        cmd.Parameters.Add(outputParam);
 
                         await cmd.ExecuteNonQueryAsync();
 
-                        string returnValue = outputParan.Value.ToString();
-
-                        return returnValue;
+                        return outputParam.Value.ToString();
                     }
                 }
             }
@@ -226,7 +221,6 @@ namespace CRUDOperations.Services
                 return $"Error: {ex.Message}";
             }
         }
-
 
 
 

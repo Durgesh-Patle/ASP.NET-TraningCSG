@@ -1,0 +1,130 @@
+﻿@model Registration_Form.Models.User
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registration Form</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 0;
+        }
+
+        .reg-from {
+            width: 70%;
+            padding: 10px;
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 0 10px black;
+            margin:auto;
+        }
+
+        h2 {
+            text-align: center;
+            color: #333;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        input[type="text"],
+        input[type="email"],
+        input[type="tel"] {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            margin-bottom: 10px;
+            font-size: 16px;
+        }
+
+        input[type="submit"] {
+            width: 100%;
+            padding: 12px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 18px;
+        }
+
+            input[type="submit"]:hover {
+                background-color: #45a049;
+            }
+
+        .back-link {
+            text-align: center;
+            margin-top: 20px;
+        }
+
+            .back-link a {
+                color: #007bff;
+                text-decoration: none;
+                font-size: 16px;
+            }
+
+                .back-link a:hover {
+                    text-decoration: underline;
+                }
+
+        hr {
+            border: 1px solid #ddd;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="reg-from">
+        <h2>Registration Form</h2>
+        <hr />
+        <form asp-action="InsertUser" method="post" asp-controller="User">
+            <div class="form-group">
+                <input type="text" placeholder="Enter First Name"  name="FirstName" required />
+            </div>
+
+            <div class="form-group">
+                <input type="text" placeholder="Enter Last Name" name="LastName" required />
+            </div>
+
+            <div class="form-group">
+                <input type="email" placeholder="Enter Email" name="Email" required />
+            </div>
+
+            <div class="form-group">
+                <input type="tel" placeholder="Enter Phone Number" name="PhoneNumber" required />
+            </div>
+
+            <div class="form-group">
+                <input type="text" placeholder="Enter Address" name="StreetAddress" required />
+            </div>
+
+            <div class="form-group">
+                <input type="text" placeholder="Enter State" name="StateName" required />
+            </div>
+
+            <div class="form-group">
+                <input type="text" placeholder="Enter Country" name="CountryName" required />
+            </div>
+
+            <div class="form-group">
+                <input type="text" placeholder="Enter Area Code" name="AreaCode" required />
+            </div>
+
+            <div class="form-group">
+                <input type="submit" value="Submit" />
+            </div>
+        </form>
+
+        <div class="back-link">
+            <a asp-action="Index">Back to List</a>
+        </div>
+    </div>
+
+</body>
+</html>
